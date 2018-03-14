@@ -1,0 +1,42 @@
+#!/bin/bash
+# bin/compile <build-dir> <cache-dir> <env-dir>
+
+### Configure environment (fail test)
+set -e
+
+### Configure directories
+
+readonly BP_DIR=$(cd "$(dirname "${0:-}")"/..; pwd) # absolute path
+
+echo "BP_DIR -> $BP_DIR"
+
+readonly BUILD_DIR="${1:-}"
+readonly CACHE_DIR="${2:-}"
+readonly ENV_DIR="${3:-}"
+
+GATLING_VERSION='2.3.1'
+GATLING_MAVEN_URL="https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/$GATLING_VERSION/gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"
+
+# create directory for gatling install
+mkdir -p /opt/gatling
+
+echo "change dir to /opt/gatling"
+cd /opt/gatling
+
+# download gatling
+echo "downloading gatling"
+curl --retry --silent --max-time 60 --location "${GATLING_MAVEN_URL}"
+
+# install gatling
+echo "Installing Gatling version $GATLING_VERSION"
+
+echo "unzip: gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"
+unzip "gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"
+
+mv "gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"/* .
+rm "gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"
+
+echo "----"
+
+export GATLING_HOME='/opt/gatling'
+echo "set GATLING_HOME=$GATLING_HOME"
