@@ -34,8 +34,8 @@ echo "Installing Gatling version $GATLING_VERSION"
 echo "unzip: ${GATLING_FILENAME}"
 unzip "${GATLING_FILENAME}"
 
-mv "$(basename $GATLING_FILENAME .zip)"/* .
-rm $(basename $GATLING_FILENAME .zip)
+# mv "$(basename $GATLING_FILENAME .zip)"/* .
+# rm $(basename $GATLING_FILENAME .zip)
 
 echo "----"
 
