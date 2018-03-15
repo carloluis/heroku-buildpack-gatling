@@ -25,7 +25,7 @@ GATLING_MAVEN_URL="https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-
 
 # download gatling
 echo "downloading gatling"
-curl --retry --silent --max-time 60 --location "${GATLING_MAVEN_URL}"
+curl --retry 4 --silent --max-time 60 --location "${GATLING_MAVEN_URL}"
 
 # install gatling
 echo "Installing Gatling version $GATLING_VERSION"
