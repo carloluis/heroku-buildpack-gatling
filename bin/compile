@@ -15,7 +15,8 @@ readonly CACHE_DIR="${2:-}"
 readonly ENV_DIR="${3:-}"
 
 GATLING_VERSION='2.3.1'
-GATLING_MAVEN_URL="https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/$GATLING_VERSION/gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"
+GATLING_FILENAME="gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"
+GATLING_MAVEN_URL="https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/$GATLING_VERSION/$GATLING_FILENAME"
 
 # create directory for gatling install
 # mkdir -p /opt/gatling
@@ -25,16 +26,16 @@ GATLING_MAVEN_URL="https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-
 
 # download gatling
 echo "downloading gatling"
-curl --retry 4 --silent --max-time 60 --location "${GATLING_MAVEN_URL}"
+curl --retry 4 --silent --max-time 60 --location "${GATLING_MAVEN_URL}" --output "${GATLING_FILENAME}"
 
 # install gatling
 echo "Installing Gatling version $GATLING_VERSION"
 
-echo "unzip: gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"
-unzip "gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"
+echo "unzip: ${GATLING_FILENAME}"
+unzip "${GATLING_FILENAME}"
 
-mv "gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"/* .
-rm "gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"
+mv "${GATLING_FILENAME}"/* .
+rm "${GATLING_FILENAME}"
 
 echo "----"
 
