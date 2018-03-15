@@ -18,10 +18,10 @@ GATLING_VERSION='2.3.1'
 GATLING_MAVEN_URL="https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/$GATLING_VERSION/gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"
 
 # create directory for gatling install
-mkdir -p /opt/gatling
+# mkdir -p /opt/gatling
 
-echo "change dir to /opt/gatling"
-cd /opt/gatling
+# echo "change dir to /opt/gatling"
+# cd /opt/gatling
 
 # download gatling
 echo "downloading gatling"
