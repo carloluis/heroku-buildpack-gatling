@@ -14,6 +14,10 @@ readonly BUILD_DIR="${1:-}"
 readonly CACHE_DIR="${2:-}"
 readonly ENV_DIR="${3:-}"
 
+echo "BUILD_DIR=${BUILD_DIR}"
+echo "CACHE_DIR=${CACHE_DIR}"
+echo "ENV_DIR=${ENV_DIR}"
+
 GATLING_VERSION='2.3.1'
 GATLING_FILENAME="gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"
 GATLING_MAVEN_URL="https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/$GATLING_VERSION/$GATLING_FILENAME"
@@ -34,10 +38,17 @@ echo "Installing Gatling version $GATLING_VERSION"
 echo "unzip: ${GATLING_FILENAME}"
 unzip "${GATLING_FILENAME}"
 
+# gatling files inside .../tmp
+
+echo "moving files from $(basename $GATLING_FILENAME .zip) to $BUILD_DIR"
+mv "$(basename $GATLING_FILENAME .zip)" "$BUILD_DIR"
+
 # mv "$(basename $GATLING_FILENAME .zip)"/* .
 # rm $(basename $GATLING_FILENAME .zip)
 
 echo "----"
 
-export GATLING_HOME='/opt/gatling'
+# export GATLING_HOME='/opt/gatling'
+export PATH=$PATH:"$BUILD_DIR/bin"
+
 echo "set GATLING_HOME=$GATLING_HOME"
