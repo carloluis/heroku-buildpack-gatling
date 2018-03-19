@@ -22,9 +22,6 @@ GATLING_VERSION='2.3.1'
 GATLING_FILENAME="gatling-charts-highcharts-bundle-$GATLING_VERSION-bundle.zip"
 GATLING_MAVEN_URL="https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/$GATLING_VERSION/$GATLING_FILENAME"
 
-### move dependency
-source "$BP_DIR/lib/move.sh"
-
 # create directory for gatling install
 mkdir -p "$BUILD_DIR/gatling"
 
@@ -39,7 +36,8 @@ unzip "${GATLING_FILENAME}"
 
 echo "    moving files from $(basename $GATLING_FILENAME -bundle.zip) into"
 echo "    $BUILD_DIR/gatling"
-move "$(basename $GATLING_FILENAME -bundle.zip)"/* "$BUILD_DIR/gatling"
+cp -pRP "$(basename $GATLING_FILENAME -bundle.zip)"/* "$BUILD_DIR/gatling"
+rm -rf "$(basename $GATLING_FILENAME -bundle.zip)"
 
 export PATH=$PATH:"$BUILD_DIR/gatling/bin"
 
