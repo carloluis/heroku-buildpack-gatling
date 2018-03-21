@@ -39,6 +39,9 @@ echo "    $BUILD_DIR/gatling"
 cp -pRP "$(basename $GATLING_FILENAME -bundle.zip)"/* "$BUILD_DIR/gatling"
 rm -rf "$(basename $GATLING_FILENAME -bundle.zip)"
 
-export PATH=$PATH:"$BUILD_DIR/gatling/bin"
+# export
+PROFILE_PATH="$BUILD_DIR/.profile.d/gatling.sh"
+mkdir -p $(dirname $PROFILE_PATH)
+echo 'export PATH=$PATH:"$BUILD_DIR/gatling/bin"' >> $PROFILE_PATH
 
 echo "    DONE"
